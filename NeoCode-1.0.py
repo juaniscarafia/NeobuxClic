@@ -9,20 +9,22 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 
+#Login web
 user = raw_input('Introducir usuario: ')
 password1 = raw_input('Introducir contraseña primaria: ')
 password2 = raw_input('Introducir contraseña secundaria (dejar en blanco si no tiene): ')
 
 def wait_seconds(second):
+    '''Funcion de espera para los avisos y evitar errores'''
     for valor in xrange(second+1):
         sys.stdout.write("\b\b\b%2i%%" % valor)
         sys.stdout.flush()
         time.sleep(1)
     print '\n'
 
-rates = [str(x) for x in range(11)]
-total = 0
-subjects = 0
+#rates = [str(x) for x in range(11)]
+#total = 0
+#subjects = 0
 
 #Se crea una instancia de Selenium
 driver = webdriver.Firefox()
@@ -41,6 +43,7 @@ id_rojos = []
 purplecant = ''
 orangecant = ''
 graycant = ''
+
 #Busco la cantidad de avisos lila, gris y naranja
 a = driver.find_elements_by_tag_name("a")
 for i in a:
@@ -50,16 +53,17 @@ for i in a:
         orangecant = i.text
     if i.get_attribute("class") == "button small2 gray2":
         graycant = i.text
-    #button small2 green - Premium
 size_ad = 0
+
 if purplecant.isdigit() == True:
     size_ad+= int(purplecant)
 if orangecant.isdigit() == True:
     size_ad+= int(orangecant)
 if graycant.isdigit() == True:
     size_ad+= int(graycant)
+
+#Calculo de adprice
 size_adprice = size_ad * 3
-# size_adprice = 76
 
 #Genero los ID de los avisos lilas y de los puntos rojos a clickear
 for aviso in range(1,size_ad):
@@ -90,11 +94,11 @@ driver.find_element_by_id("ap_h").send_keys(Keys.CONTROL + "t")
 urladprize = driver.find_element_by_id("ap_h").get_attribute("href")
 driver.get(urladprize)
 print 'aviso: 1    ',
-wait_seconds(25)
+wait_seconds(15)
 for aviso in range(1,size_adprice):
     driver.find_element_by_id("nxt_bt_a").click()
     print 'aviso: ', aviso+1,'    ',
-    wait_seconds(25)
+    wait_seconds(15)
 print 'No hay más adprize, se vieron: ', size_adprice
 driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
 driver.find_element_by_tag_name('body').send_keys(Keys.ALT + Keys.NUMPAD1)
