@@ -66,7 +66,7 @@ if graycant.isdigit() == True:
 size_adprice = size_ad * 3
 
 #Genero los ID de los avisos lilas y de los puntos rojos a clickear
-for aviso in range(1,size_ad):
+for aviso in range(10,size_ad):
     id_avisos.append('l0l'+str(aviso))
     id_rojos.append('l'+str(aviso))
 
@@ -84,10 +84,24 @@ for aviso in id_avisos:
     #----------------------
     # Detectar popup aca
     #----------------------
-    driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
-    driver.find_element_by_tag_name('body').send_keys(Keys.ALT + Keys.NUMPAD1)
-    driver.switch_to.window(driver.current_window_handle)
+    # Prueba TRY
+    try:
+        driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
+        driver.find_element_by_tag_name('body').send_keys(Keys.ALT + Keys.NUMPAD1)
+        driver.switch_to.window(driver.current_window_handle)
+    except:
+        print 'Confirmación de cierre de aviso'
+        Alert(driver).accept()
+        print 'Aviso cerrado'
+        #driver.switch_to_alert().accept()
+    #Fin Prueba TRY
+
+    # Codigo que anda aca abajo
+    # driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
+    # driver.find_element_by_tag_name('body').send_keys(Keys.ALT + Keys.NUMPAD1)
+    # driver.switch_to.window(driver.current_window_handle)
 driver.refresh()
+size_adprice = 78
 print 'Clicks realizados!!, quedan ', size_adprice, ' adprize.'
 print 'Comienzan clics adprize en:    ',
 wait_seconds(15)
@@ -99,7 +113,12 @@ driver.get(urladprize)
 print 'aviso: 1    ',
 wait_seconds(15)
 for aviso in range(1,size_adprice):
-    driver.find_element_by_id("nxt_bt_a").click()
+    try:
+        driver.find_element_by_id("nxt_bt_a").click()
+    except:
+        print 'Confirmación de cierre de adprize'
+        Alert(driver).accept()
+        print 'Adprize cerrado'
     print 'aviso: ', aviso+1,'    ',
     wait_seconds(15)
 print 'No hay más adprize, se vieron: ', size_adprice
