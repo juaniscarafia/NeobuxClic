@@ -66,7 +66,7 @@ if graycant.isdigit() == True:
 size_adprice = size_ad * 3
 
 #Genero los ID de los avisos lilas y de los puntos rojos a clickear
-for aviso in range(10,size_ad):
+for aviso in range(15,size_ad):
     id_avisos.append('l0l'+str(aviso))
     id_rojos.append('l'+str(aviso))
 
@@ -101,7 +101,6 @@ for aviso in id_avisos:
     # driver.find_element_by_tag_name('body').send_keys(Keys.ALT + Keys.NUMPAD1)
     # driver.switch_to.window(driver.current_window_handle)
 driver.refresh()
-size_adprice = 78
 print 'Clicks realizados!!, quedan ', size_adprice, ' adprize.'
 print 'Comienzan clics adprize en:    ',
 wait_seconds(15)
