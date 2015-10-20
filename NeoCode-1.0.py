@@ -75,7 +75,8 @@ red_point = 0
 print driver.title
 for aviso in id_avisos:
     driver.find_element_by_id(aviso).click()
-    driver.find_element_by_id(id_rojos[red_point]).send_keys(Keys.CONTROL + "t")
+    #driver.find_element_by_id(id_rojos[red_point]).send_keys(Keys.CONTROL + "t")
+    driver.find_element_by_id(id_rojos[red_point]).click()
     urlrojo = driver.find_element_by_id(id_rojos[red_point]).get_attribute("href")
     driver.get(urlrojo)
     print driver.title

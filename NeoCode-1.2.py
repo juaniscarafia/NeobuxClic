@@ -75,9 +75,10 @@ red_point = 0
 print driver.title
 for aviso in id_avisos:
     driver.find_element_by_id(aviso).click()
-    driver.find_element_by_id(id_rojos[red_point]).send_keys(Keys.CONTROL + "t")
-    urlrojo = driver.find_element_by_id(id_rojos[red_point]).get_attribute("href")
-    driver.get(urlrojo)
+    driver.find_element_by_id(id_rojos[red_point]).click()
+    #driver.find_element_by_id(id_rojos[red_point]).send_keys(Keys.CONTROL + "t")
+    #urlrojo = driver.find_element_by_id(id_rojos[red_point]).get_attribute("href")
+    #driver.get(urlrojo)
     print driver.title
     red_point+= 1
     wait_seconds(15)
@@ -85,14 +86,14 @@ for aviso in id_avisos:
     # Detectar popup aca
     #----------------------
     # Prueba TRY
-    try:
-        driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
-        driver.find_element_by_tag_name('body').send_keys(Keys.ALT + Keys.NUMPAD1)
-        driver.switch_to.window(driver.current_window_handle)
-    except:
-        print 'Confirmación de cierre de aviso'
-        Alert(driver).accept()
-        print 'Aviso cerrado'
+    # try:
+    #     driver.find_element_by_tag_name('body').send_keys(Keys.CONTROL + 'w')
+    #     driver.find_element_by_tag_name('body').send_keys(Keys.ALT + Keys.NUMPAD1)
+    #     driver.switch_to.window(driver.current_window_handle)
+    # except:
+    #     print 'Confirmación de cierre de aviso'
+    #     Alert(driver).accept()
+    #     print 'Aviso cerrado'
         #driver.switch_to_alert().accept()
     #Fin Prueba TRY
 
